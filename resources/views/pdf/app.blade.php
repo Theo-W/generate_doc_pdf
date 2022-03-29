@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        code {
+        pre {
             background-color: #B3B3B3FF;
             padding: .15em;
             border-radius: 2px;

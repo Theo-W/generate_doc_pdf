@@ -19,6 +19,15 @@ class DocumentController extends Controller
         return view('document.home');
     }
 
+    public function show(int $id)
+    {
+        $doc = Documentation::find($id);
+
+        return view('show', [
+            'doc' => $doc
+        ]);
+    }
+
     public function create()
     {
         return view('document.create');
@@ -64,7 +73,6 @@ class DocumentController extends Controller
         $data = [
             'content' => $doc->content
         ];
-
 
         $pdf = \PDF::loadView('pdf.document_pdf', $data);
         return $pdf->download( $doc->title . '.pdf');

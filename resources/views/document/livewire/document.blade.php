@@ -44,6 +44,7 @@
                     <td>
                         <a href="{{ route('edit_doc', ['id' => $doc->id ]) }}" class="btn btn-icon"><i
                                 class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('show', ['id' => $doc->id ]) }}" class="btn btn-primary">voir</a>
                         @include('document.modal._delete_doc')
                         <a href="{{ route('generate_pdf', ['id' => $doc->id] ) }}" class="btn btn-icon"><i
                                 class="bi bi-file-earmark-pdf"></i></a>
