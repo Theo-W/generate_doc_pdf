@@ -18,11 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/atom-one-dark.min.css" rel="stylesheet" />
     <style>
-        pre {
-            background-color: #B3B3B3FF;
-            padding: .15em;
-            border-radius: 2px;
+        .hljs {
+            padding: 2em;
+            border-radius: 5px;
         }
 
         table {
@@ -43,5 +43,19 @@
 <main class="container py-4">
     @yield('content')
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+
+    function generatePDF() {
+        const content = document.querySelector('#element')
+
+        html2pdf().set({
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        }).from(content).save()
+    }
+</script>
 </body>
 </html>

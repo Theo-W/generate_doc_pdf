@@ -13,6 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('ckeditor/build/ckeditor.js') }}" defer></script>
     <script src="{{ asset('ckeditor/app.js') }}" defer></script>
+    @yield('style')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

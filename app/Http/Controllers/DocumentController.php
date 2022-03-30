@@ -65,16 +65,4 @@ class DocumentController extends Controller
         return redirect()->route('home')
             ->with('Votre documentation à bien été modifier');
     }
-
-    public function createPdf(int $id)
-    {
-        $doc = Documentation::find($id);
-
-        $data = [
-            'content' => $doc->content
-        ];
-
-        $pdf = \PDF::loadView('pdf.document_pdf', $data);
-        return $pdf->download( $doc->title . '.pdf');
-    }
 }
