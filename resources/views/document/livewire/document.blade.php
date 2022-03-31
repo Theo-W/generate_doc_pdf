@@ -1,8 +1,8 @@
 <div>
     <div class="d-flex justify-content-between align-items-center">
         <h1>Mes documentations</h1>
-        <a href="{{ route('create_doc') }}" class="btn btn-primary">
-            <i class="bi bi-plus"></i> Crée une doc
+        <a href="{{ route('doc.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus"></i> Créer une doc
         </a>
     </div>
 
@@ -26,7 +26,6 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <td>#</td>
             <td>Title</td>
             <td>Crée le</td>
             <td>Modifier le</td>
@@ -37,17 +36,13 @@
         @if($docs->count() > 0)
             @foreach($docs as $doc)
                 <tr>
-                    <td>{{ $doc->id }}</td>
                     <td>{{ $doc->title }}</td>
                     <td>{{ $doc->created_at->format('d M Y') }}</td>
                     <td>{{ $doc->updated_at->format('d M Y')  }}</td>
                     <td>
-                        <a href="{{ route('edit_doc', ['id' => $doc->id ]) }}" class="btn btn-icon"><i
-                                class="bi bi-pencil-square"></i></a>
-                        <a href="{{ route('show', ['id' => $doc->id ]) }}" class="btn btn-primary">voir</a>
+                        <a href="{{ route('doc.edit', ['id' => $doc->id, 'slug' => $doc->slug ]) }}" class="btn btn-icon"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('doc.show', ['id' => $doc->id, 'slug' => $doc->slug ]) }}" class="btn btn-icon"><i class="bi bi-eye"></i></a>
                         @include('document.modal._delete_doc')
-                        <a href="{{ route('generate_pdf', ['id' => $doc->id] ) }}" class="btn btn-icon"><i
-                                class="bi bi-file-earmark-pdf"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -58,4 +53,8 @@
         @endif
         </tbody>
     </table>
+
+    <div class="pagination">
+        {{ $docs->links() }}
+    </div>
 </div>

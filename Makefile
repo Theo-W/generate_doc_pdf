@@ -12,24 +12,10 @@ npm = npm install
 .PHONY: start
 start:	## Start docker stack
 	$(dc) up -d
-
-.PHONY: build
-build:	## Install composer and nodejs dependencies
-	$(dc) up -d
 	$(composer) install
-	$(dc) exec php bash -c 'npm install'
-	$(dc) up
-
-.PHONY: start
-stop:	## Stop all containers
-	$(dc) stop
-
-.PHONY: rm
-down:    ## Stop and remove all containers
-	$(dc) down
-
-.PHONY: restart
-restart: down start	## Restart (rebuild) containers
+	$(dc) exec php bash -c 'npm install && npm run dev'
+	$(dc) exec php bash -c 'php artisan key:generate'
+	$(dc) exec php bash -c 'php artisan migrate'
 
 .PHONY: in-dc
 in-dc:	## Run into php container
@@ -38,6 +24,15 @@ in-dc:	## Run into php container
 .PHONY: dev ## Run dev server
 dev:
 	$(dc) up
+
+.PHONY: deploy ## Run dev server
+deploy:
+	$(dc) up -d
+	$(composer) install
+	$(dc) exec php bash -c 'npm install && npm run prod'
+	$(dc) exec php bash -c 'php artisan key:generate'
+	$(dc) exec php bash -c 'php artisan migrate'
+
 
 ## —— Laravel ———————————————————————————————————————————————————————————————
 

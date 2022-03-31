@@ -13,13 +13,14 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('ckeditor/build/ckeditor.js') }}" defer></script>
     <script src="{{ asset('ckeditor/app.js') }}" defer></script>
-    @yield('style')
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+@yield('style')
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
@@ -28,7 +29,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                IsoxPDF
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +44,20 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav d-flex">
-                    <li class="navbar-nav ml-auto">
-                        @Auth
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link text-center me-3" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link text-center me-3"
+                                   href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="navbar-nav ml-auto">
                             <a class="nav-link" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
@@ -58,13 +71,14 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                        @endauth
-                    </li>
+                            @endguest
+                        </li>
                 </ul>
             </div>
         </div>
     </nav>
     <main class="container py-4">
+        @include('layout._flash')
         @yield('content')
     </main>
 </div>

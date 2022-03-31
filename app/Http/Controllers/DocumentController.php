@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Documentation;
-use DBlackborough\Quill\Render;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class DocumentController extends Controller
 {
@@ -23,7 +23,7 @@ class DocumentController extends Controller
     {
         $doc = Documentation::find($id);
 
-        return view('show', [
+        return view('document.show', [
             'doc' => $doc
         ]);
     }
@@ -35,9 +35,14 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-         Documentation::create([
+        $this->validate($request, [
+            'title' => 'required|min:3'
+        ]);
+
+        Documentation::create([
             'title' => $request->get('title'),
-            'content' => $request->get('content')
+            'content' => $request->get('content'),
+            'slug' => Str::random(7)
         ]);
 
         return redirect()->route('home')
@@ -57,12 +62,16 @@ class DocumentController extends Controller
 
     public function update(int $id, Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:3',
+        ]);
+
         Documentation::find($id)->update([
             'title' => $request->get('title'),
             'content' => $request->get('content')
         ]);
 
         return redirect()->route('home')
-            ->with('Votre documentation à bien été modifier');
+            ->with('success', 'Votre documentation à bien été modifier');
     }
 }

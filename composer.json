@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
+        "barryvdh/laravel-dompdf": "^1.0",
         "deanblackborough/php-quill-renderer": "^4.00",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -18,7 +19,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.7",
-        "predis/predis": "^1.1",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

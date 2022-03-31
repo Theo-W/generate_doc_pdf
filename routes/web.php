@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DocumentController::class, 'index'])->name('home');
-Route::get('/create/doc', [DocumentController::class, 'create'])->name('create_doc');
-Route::post('/create/doc', [DocumentController::class, 'store'])->name('create_doc_store');
-Route::get('/edit/doc/{id}', [DocumentController::class, 'edit'])->name('edit_doc');
-Route::get('/show/doc/{id}', [DocumentController::class, 'show'])->name('show');
-Route::post('/edit/doc/{id}', [DocumentController::class, 'update'])->name('edit_doc_update');
-Route::get('/generate/pdf/{id}', [DocumentController::class, 'createPdf'])->name('generate_pdf');
 
+Route::prefix('/doc')->name('doc.')->group(function() {
+    Route::get('/create', [DocumentController::class, 'create'])->name('create');
+    Route::post('/create', [DocumentController::class, 'store'])->name('store');
+    Route::get('/edit/{id}/{slug}', [DocumentController::class, 'edit'])->name('edit');
+    Route::post('/edit/{id}', [DocumentController::class, 'update'])->name('update');
+    Route::get('/show/{id}/{slug}', [DocumentController::class, 'show'])->name('show');
+});
 
 Auth::routes();
