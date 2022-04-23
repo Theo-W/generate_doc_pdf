@@ -17,7 +17,7 @@
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Contenu</label>
-            <textarea name="content " id="content" required style="height: auto; min-height: 200px; font-size: 16px;">
+            <textarea name="content" id="content" required style="height: auto; min-height: 200px; font-size: 16px;">
                 {{ old('content') }}
             </textarea>
         </div>

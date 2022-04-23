@@ -10,7 +10,11 @@ function Generatepdf() {
 
     const opt = {
         margin:       3,
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+        pagebreak: {
+            mode: [
+                'avoid-all'
+            ]
+        },
         html2canvas:  { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', precision: '16', floatPrecision: '16' }
     }
